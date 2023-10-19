@@ -7,8 +7,8 @@ import java.util.Set;
 
 public interface Repository {
     Set<ICurrency> getCollection();
-    ICurrency findByName(String name);
-    ICurrency findByCode(String code);
+    Optional<ICurrency> findByName(String name);
+    Optional<ICurrency> findByCode(String code);
     Optional<ICurrency> addCurrency(ICurrency currency);
     Optional<ICurrency> removeCurrency(ICurrency currency);
 
