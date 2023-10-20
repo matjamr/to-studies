@@ -1,4 +1,4 @@
-package org.jamroz.mateusz.context;
+package org.jamroz.mateusz.context.repository;
 
 import org.jamroz.mateusz.currency.ICurrency;
 

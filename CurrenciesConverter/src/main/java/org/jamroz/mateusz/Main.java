@@ -1,19 +1,49 @@
 package org.jamroz.mateusz;
 
-// Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
-// then press Enter. You can now see whitespace characters in your code.
+import org.jamroz.mateusz.context.Context;
+import org.jamroz.mateusz.context.CurrencyContext;
+import org.jamroz.mateusz.context.repository.DataRepository;
+import org.jamroz.mateusz.context.repository.Repository;
+import org.jamroz.mateusz.currency.ICurrency;
+import org.jamroz.mateusz.helper.ICurrencyParser;
+import org.jamroz.mateusz.init.CurrencyDataReader;
+import org.jamroz.mateusz.init.DataReader;
+import org.jamroz.mateusz.io.CurrencyProgramRunner;
+import org.jamroz.mateusz.io.ProgramRunner;
+import org.jamroz.mateusz.io.input.FailureInputHandler;
+import org.jamroz.mateusz.io.input.InputOptionsEnum;
+import org.jamroz.mateusz.io.input.ProcessingState;
+import org.jamroz.mateusz.io.input.SuccessfullInputHandler;
+import org.jamroz.mateusz.io.input.actions.ExchangeCurrencyAction;
+import org.jamroz.mateusz.io.input.actions.IsShortenedNamePredicate;
+import org.jamroz.mateusz.io.output.PossibleOptionsPrinter;
+
+import java.util.Map;
+import java.util.Set;
+
 public class Main {
+    private static final String FILENAME = "staff.xml";
+
     public static void main(String[] args) {
-        // Press Alt+Enter with your caret at the highlighted text to see how
-        // IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
+        DataReader<Set<ICurrency>, String> currencyDataReader = new CurrencyDataReader(new ICurrencyParser());
+        Set<ICurrency> ret = currencyDataReader.readFrom(FILENAME);
 
-        // Press Shift+F10 or click the green arrow button in the gutter to run the code.
-        for (int i = 1; i <= 5; i++) {
+        Repository repository = new DataRepository(ret);
+        Context context = CurrencyContext.init(repository);
 
-            // Press Shift+F9 to start debugging your code. We have set one breakpoint
-            // for you, but you can always add more by pressing Ctrl+F8.
-            System.out.println("i = " + i);
-        }
+        ProgramRunner programRunner = new CurrencyProgramRunner(context,
+                new PossibleOptionsPrinter(),
+                new SuccessfullInputHandler(
+                        Map.of(
+                                InputOptionsEnum.ADD, (opt) -> ProcessingState.CONTINUE,
+                                InputOptionsEnum.REMOVE, (opt) -> ProcessingState.CONTINUE,
+                                InputOptionsEnum.CONVERT, new ExchangeCurrencyAction(new IsShortenedNamePredicate()),
+                                InputOptionsEnum.QUIT, (opt) -> ProcessingState.ABORT
+                                )
+                ),
+                new FailureInputHandler()
+        );
+
+        programRunner.run(context);
     }
 }
