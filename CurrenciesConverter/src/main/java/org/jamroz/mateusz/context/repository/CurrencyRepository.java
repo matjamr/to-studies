@@ -5,10 +5,10 @@ import org.jamroz.mateusz.currency.ICurrency;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class DataRepository implements Repository {
+public class CurrencyRepository implements Repository {
     private final Set<ICurrency> currenciesSet;
 
-    public DataRepository(Set<ICurrency> currenciesSet) {
+    public CurrencyRepository(Set<ICurrency> currenciesSet) {
         this.currenciesSet = currenciesSet;
     }
 

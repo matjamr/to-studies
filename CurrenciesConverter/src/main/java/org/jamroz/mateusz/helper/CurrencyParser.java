@@ -10,7 +10,7 @@ import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-public class ICurrencyParser implements Function<XmlEntity, Set<ICurrency>> {
+public class CurrencyParser implements Function<XmlEntity, Set<ICurrency>> {
     @Override
     public Set<ICurrency> apply(XmlEntity xmlEntity) {
         return Optional.ofNullable(xmlEntity)

@@ -29,7 +29,7 @@ public class CurrencyProgramRunner implements ProgramRunner {
     }
 
     @Override
-    public void run(Context context) {
+    public void run() {
         ProcessingState processingState;
         do {
             possibleOptionsPrinter.accept(Arrays.asList(InputOptionsEnum.values()));

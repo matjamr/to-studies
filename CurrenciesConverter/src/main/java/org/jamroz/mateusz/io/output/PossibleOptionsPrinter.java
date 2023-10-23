@@ -7,9 +7,6 @@ import java.util.function.Consumer;
 
 public class PossibleOptionsPrinter implements Consumer<List<InputOptionsEnum>> {
 
-    public PossibleOptionsPrinter() {
-    }
-
     @Override
     public void accept(List<InputOptionsEnum> inputOptionsEnums) {
         System.out.println("Please select one from below");
