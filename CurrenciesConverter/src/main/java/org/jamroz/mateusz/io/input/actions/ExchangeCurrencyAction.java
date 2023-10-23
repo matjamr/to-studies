@@ -27,11 +27,6 @@ public class ExchangeCurrencyAction implements Function<Context, ProcessingState
         System.out.println("To:");
         String to = scanner.nextLine();
 
-//        ICurrency currencyFrom = Optional.of(from)
-//                .filter(isShortenedNamePredicate)
-//                .map(val -> context.getRepository().findByCode(val))
-//                .orElse(context.getRepository().findByName(from))
-//                .orElseThrow(() -> new NoSuchElementException("There is no such currency"));
 
         ICurrency currencyTo = Optional.of(to)
                 .filter(isShortenedNamePredicate)
