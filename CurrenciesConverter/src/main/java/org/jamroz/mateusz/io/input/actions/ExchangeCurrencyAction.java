@@ -21,21 +21,30 @@ public class ExchangeCurrencyAction implements Function<Context, ProcessingState
 
     @Override
     public ProcessingState apply(Context context) {
-        System.out.println("pln:");
-        String pln = scanner.nextLine();
+        System.out.println("From:");
+        String from = scanner.nextLine();
+        ICurrency currencyFrom = getCurrency(context, from);
+
+        System.out.println("Amount:");
+        double fromAmount  = Double.parseDouble(scanner.nextLine());
+
 
         System.out.println("To:");
         String to = scanner.nextLine();
+        ICurrency currencyTo = getCurrency(context, to);
 
+        double estimatedValue = currencyFrom.getFactorRate() / currencyTo.getFactorRate() * fromAmount;
 
-        ICurrency currencyTo = Optional.of(to)
-                .filter(isShortenedNamePredicate)
-                .map(val -> context.getRepository().findByCode(val))
-                .orElse(context.getRepository().findByName(to))
-                .orElseThrow(() -> new NoSuchElementException("There is no such currency"));
-
-        System.out.println("Your value will be: " + Integer.parseInt(pln) / currencyTo.getFactorRate() * currencyTo.getRate());
+        System.out.printf("Estimated value FROM [%s %.2f] TO [%s %.2f]%n", currencyFrom.getCode(), fromAmount, currencyTo.getCode(),estimatedValue);
 
         return ProcessingState.CONTINUE;
+    }
+
+    private ICurrency getCurrency(Context context, String curr) {
+        return Optional.of(curr)
+                .filter(isShortenedNamePredicate)
+                .map(val -> context.getRepository().findByCode(val))
+                .orElse(context.getRepository().findByName(curr))
+                .orElseThrow(() -> new NoSuchElementException("There is no such currency for " + curr));
     }
 }

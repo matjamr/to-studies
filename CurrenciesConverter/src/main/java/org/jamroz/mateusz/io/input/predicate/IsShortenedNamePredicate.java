@@ -1,4 +1,4 @@
-package org.jamroz.mateusz.io.input.actions;
+package org.jamroz.mateusz.io.input.predicate;
 
 import java.util.Optional;
 import java.util.function.Predicate;

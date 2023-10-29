@@ -63,14 +63,11 @@ public class Currency implements ICurrency {
 
         Currency currency = (Currency) o;
 
-        if (!Objects.equals(name, currency.name)) return false;
-        if (!Objects.equals(code, currency.code)) return false;
-        if (!Objects.equals(rate, currency.rate)) return false;
-        return Objects.equals(factorRate, currency.factorRate);
+        return Objects.equals(code, currency.code);
     }
 
     @Override
     public int hashCode() {
-        return (int) (name.hashCode() + code.hashCode() + rate + factorRate);
+        return code.hashCode();
     }
 }

@@ -1,4 +1,4 @@
-package org.jamroz.mateusz.helper;
+package org.jamroz.mateusz.init.helper;
 
 import org.jamroz.mateusz.currency.Currency;
 import org.jamroz.mateusz.currency.ICurrency;

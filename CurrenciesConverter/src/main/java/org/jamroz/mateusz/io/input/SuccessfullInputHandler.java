@@ -3,6 +3,7 @@ package org.jamroz.mateusz.io.input;
 import org.jamroz.mateusz.context.Context;
 
 import java.util.Map;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.function.Function;
 
@@ -17,9 +18,13 @@ public class SuccessfullInputHandler implements InputHandler {
     @Override
     public ProcessingState handle(String input, Context context) {
         final InputOptionsEnum inputOption = InputOptionsEnum.valueOf(input);
-
-        return Optional.ofNullable(actionMap.get(inputOption))
-                .map(function -> function.apply(context))
-                .orElse(ProcessingState.ABORT);
+        try {
+            return Optional.ofNullable(actionMap.get(inputOption))
+                    .map(function -> function.apply(context))
+                    .orElse(ProcessingState.ABORT);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return ProcessingState.CONTINUE;
+        }
     }
 }
