@@ -17,7 +17,7 @@ public class RemoveCurrencyAction implements Function<Context, ProcessingState> 
     @Override
     public ProcessingState apply(Context context) {
         System.out.println("Code: ");
-        final String code = scanner.nextLine();
+        final String code = scanner.nextLine().toUpperCase();
 
         context.getRepository().findByCode(code)
                 .ifPresentOrElse((currency) -> context.getRepository().removeCurrency(currency), () -> {

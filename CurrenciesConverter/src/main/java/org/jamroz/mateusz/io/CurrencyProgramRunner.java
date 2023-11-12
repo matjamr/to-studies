@@ -38,7 +38,7 @@ public class CurrencyProgramRunner implements ProgramRunner {
     }
 
     private ProcessingState getInput() {
-        final String selectedOption = scanner.nextLine();
+        final String selectedOption = scanner.nextLine().toUpperCase();
 
         if(possibleOptions.contains(selectedOption)) {
             return successInputHandler.handle(selectedOption, context);

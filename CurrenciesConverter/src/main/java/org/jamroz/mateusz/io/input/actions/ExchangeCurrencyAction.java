@@ -22,7 +22,7 @@ public class ExchangeCurrencyAction implements Function<Context, ProcessingState
     @Override
     public ProcessingState apply(Context context) {
         System.out.println("From:");
-        String from = scanner.nextLine();
+        String from = scanner.nextLine().toUpperCase();
         ICurrency currencyFrom = getCurrency(context, from);
 
         System.out.println("Amount:");
@@ -30,7 +30,7 @@ public class ExchangeCurrencyAction implements Function<Context, ProcessingState
 
 
         System.out.println("To:");
-        String to = scanner.nextLine();
+        String to = scanner.nextLine().toUpperCase();
         ICurrency currencyTo = getCurrency(context, to);
 
         double estimatedValue = currencyFrom.getFactorRate() / currencyTo.getFactorRate() * fromAmount;

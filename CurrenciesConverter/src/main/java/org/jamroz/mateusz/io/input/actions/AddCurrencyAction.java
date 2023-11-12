@@ -17,10 +17,10 @@ public class AddCurrencyAction implements Function<Context, ProcessingState> {
     public ProcessingState apply(Context context) {
 
         System.out.println("Name: ");
-        final String name = scanner.nextLine();
+        final String name = scanner.nextLine().toUpperCase();
 
         System.out.println("Code: ");
-        final String code = scanner.nextLine();
+        final String code = scanner.nextLine().toUpperCase();
 
         System.out.println("Rate: ");
         final Double rate = Double.parseDouble(scanner.nextLine());
