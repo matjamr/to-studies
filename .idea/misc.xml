@@ -4,8 +4,8 @@
   <component name="MavenProjectsManager">
     <option name="originalFiles">
       <list>
-        <option value="$PROJECT_DIR$/CurrenciesConverter/pom.xml" />
         <option value="$PROJECT_DIR$/VectorCalculator/pom.xml" />
+        <option value="$PROJECT_DIR$/CurrenciesConverter/pom.xml" />
       </list>
     </option>
   </component>
